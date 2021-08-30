@@ -1,0 +1,11 @@
+{
+  "name": "tiny-code-editor",
+  "version": "1.0.0",
+  "description": "Not only is it a simple editor of 300b, but you can also copy-paste the code snippets into a bookmark URL or directly into the address bar making it available offline as well.",
+  "scripts": {
+    "preinstall": "npm i serve concurrently opener -g",
+    "start": "concurrently \"serve src -p 3034\" \"opener http://localhost:3034\""
+  },
+  "author": "Lewis Nakao <lewdev@gmail.com>",
+  "license": "UNLICENSED"
+}
