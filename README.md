@@ -18,12 +18,12 @@ This is great for prototyping and for creating your own custom tool to speed up 
 
 ### Horizontal Split (289b) Press Ctrl + Enter to run code (when on the page)
 ```
-data:text/html,<textarea id=d spellcheck=false></textarea><iframe id=f></iframe><script>onkeypress=e=>e.ctrlKey&&e.keyCode==13?f.srcdoc=d.value:0</script><style>*{box-sizing:border-box;margin:0}textarea,iframe{width:100%;height:50%}textarea{resize:none;filter:invert(1)hue-rotate(180deg)}
+data:text/html,<textarea id=d spellcheck=false></textarea><iframe id=f></iframe><script>onkeypress=e=>(e.ctrlKey&&e.keyCode==13)||e.keyCode==10?f.srcdoc=d.value:0</script><style>*{box-sizing:border-box;margin:0}textarea,iframe{width:100%;height:50%}textarea{resize:none;filter:invert(1)hue-rotate(180deg)}
 ```
 
 ### Vertical split (285b) Press Ctrl + Enter to run code (when on the page)
 ```
-data:text/html,<textarea id=d spellcheck=false></textarea><iframe id=f></iframe><script>onkeypress=e=>e.ctrlKey&&e.keyCode==13?f.srcdoc=d.value:0</script><style>html,body{height:100%}*{box-sizing:border-box;margin:0}textarea,iframe{width:50%;height:100%}textarea{resize:none;filter:invert(1)hue-rotate(180deg)}
+data:text/html,<textarea id=d spellcheck=false></textarea><iframe id=f></iframe><script>onkeypress=e=>(e.ctrlKey&&e.keyCode==13)||e.keyCode==10?f.srcdoc=d.value:0</script><style>html,body{height:100%}*{box-sizing:border-box;margin:0}textarea,iframe{width:50%;height:100%}textarea{resize:none;filter:invert(1)hue-rotate(180deg)}
 ```
 
 ## Run Code
