@@ -16,19 +16,14 @@ The main bug is when you have infinite loops in your code, it will require a ref
 
 This is great for prototyping and for creating your own custom tool to speed up development.
 
-### Horizontal split (300b)
+### Horizontal Split (289b) Press Ctrl + Enter to run code (when on the page)
 ```
-data:text/html,<textarea oninput=f.srcdoc=value spellcheck=false></textarea><iframe id=f></iframe><style>html,body{height:100%}*{box-sizing:border-box;-moz-box-sizing:border-box;margin:0;vertical-align:top}textarea,iframe{width:100%;height:50%}textarea{resize:none;filter:invert(1)hue-rotate(180deg)}
-```
-
-### Vertical split (300b)
-```
-data:text/html,<textarea oninput=f.srcdoc=value spellcheck=false></textarea><iframe id=f></iframe><style>html,body{height:100%}*{box-sizing:border-box;-moz-box-sizing:border-box;margin:0;vertical-align:top}textarea,iframe{width:50%;height:100%}textarea{resize:none;filter:invert(1)hue-rotate(180deg)}
+data:text/html,<textarea id=d spellcheck=false></textarea><iframe id=f></iframe><script>onkeypress=e=>e.ctrlKey&&e.keyCode==13?f.srcdoc=d.value:0</script><style>*{box-sizing:border-box;margin:0}textarea,iframe{width:100%;height:50%}textarea{resize:none;filter:invert(1)hue-rotate(180deg)}
 ```
 
-### Vertical split, light mode, spell check on (248b)
+### Vertical split (285b) Press Ctrl + Enter to run code (when on the page)
 ```
-data:text/html,<textarea oninput=f.srcdoc=value></textarea><iframe id=f></iframe><style>html,body{height:100%}*{box-sizing:border-box;-moz-box-sizing:border-box;margin:0;vertical-align:top}textarea,iframe{width:50%;height:100%}textarea{resize:none}
+data:text/html,<textarea id=d spellcheck=false></textarea><iframe id=f></iframe><script>onkeypress=e=>e.ctrlKey&&e.keyCode==13?f.srcdoc=d.value:0</script><style>html,body{height:100%}*{box-sizing:border-box;margin:0}textarea,iframe{width:50%;height:100%}textarea{resize:none;filter:invert(1)hue-rotate(180deg)}
 ```
 
 ## Run Code
