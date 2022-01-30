@@ -12,21 +12,79 @@ I combined elements from [Mini Code Editor](https://xem.github.io/miniCodeEditor
 
 *I'm not sure if these are technically "bookmarklets" since it was defined as code you can drop into bookmarkets that start with `javascript:`.
 
-The main bug is when you have infinite loops in your code, it will require a refresh and that will clear your code. Also, this happens unintentionally since it reloads your code on every keypress.
+This is great for prototyping or using as a base-line for creating your own custom code editing tool to speed up development.
 
-This is great for prototyping and for creating your own custom tool to speed up development.
+## Press "Ctrl + Enter" to run 
+This is avoids the problem of the browser crashing as you're typing out a `while` loop.
 
-### Horizontal Split (289b) Press Ctrl + Enter to run code (when on the page)
+### Vertical (324 chars)
+```
+data:text/html,<textarea id=d spellcheck=false></textarea><iframe id=f></iframe><script>onkeypress=e=>(e.ctrlKey&&e.keyCode==13)||e.keyCode==10?f.srcdoc=d.value:0</script><style>*{box-sizing:border-box;margin:0}textarea,iframe{width:50%;height:100%;vertical-align:top}textarea{resize:none;filter:invert(1)hue-rotate(180deg)}
+```
+## Horizontal (305 chars)
 ```
 data:text/html,<textarea id=d spellcheck=false></textarea><iframe id=f></iframe><script>onkeypress=e=>(e.ctrlKey&&e.keyCode==13)||e.keyCode==10?f.srcdoc=d.value:0</script><style>*{box-sizing:border-box;margin:0}textarea,iframe{width:100%;height:50%}textarea{resize:none;filter:invert(1)hue-rotate(180deg)}
 ```
 
-### Vertical split (285b) Press Ctrl + Enter to run code (when on the page)
+## Live Editor
+This is great for HTML/CSS coding since you're less concerned about running into JavaScript issues. Just be careful not to write a `while` loop.
+
+### Vertical (251 chars)
 ```
-data:text/html,<textarea id=d spellcheck=false></textarea><iframe id=f></iframe><script>onkeypress=e=>(e.ctrlKey&&e.keyCode==13)||e.keyCode==10?f.srcdoc=d.value:0</script><style>html,body{height:100%}*{box-sizing:border-box;margin:0}textarea,iframe{width:50%;height:100%}textarea{resize:none;filter:invert(1)hue-rotate(180deg)}
+data:text/html,<textarea oninput=f.srcdoc=value spellcheck=false></textarea><iframe id=f></iframe><style>*{box-sizing:border-box;margin:0}textarea,iframe{width:50%;height:100%;vertical-align:top}textarea{resize:none;filter:invert(1)hue-rotate(180deg)}
+```
+### Horizontal (232 chars)
+```
+data:text/html,<textarea oninput=f.srcdoc=value spellcheck=false></textarea><iframe id=f></iframe><style>*{box-sizing:border-box;margin:0}textarea,iframe{width:100%;height:50%}textarea{resize:none;filter:invert(1)hue-rotate(180deg)}
 ```
 
-## Run Code
+## Code with Comments
+`data:text/html,` implies that the following text will be returned as an HTML document.
+```
+<!-- The browser's spellcheck doesn't like code  -->
+<textarea id=d spellcheck=false></textarea>
+
+<!-- This is where the code is run -->
+<iframe id=f></iframe>
+
+<!--
+  Detect when Ctrl + Enter is pressed
+
+  This is where the code in the textarea is put into the iframe:
+    f.srcdoc = d.value
+-->
+<script>
+onkeypress = e => (e.ctrlKey && e.keyCode==13) || e.keyCode==10 ? f.srcdoc = d.value : 0
+</script>
+
+<style>
+/* Makes sure textarea and iframe are flush in the window */
+* { box-sizing: border-box; margin: 0 }
+
+textarea, iframe {
+  /* Flip these values to change to horizontal layout. */
+  width: 50%;
+  height: 100%; 
+
+  /*
+    In Chrome, these two elements don't stay flush to the top of the window
+    in vertical layout.
+  */
+  vertical-align: top;
+}
+
+textarea {
+  /* Removes the resize capability since it grows/shrinks with the window. */
+  resize:none;
+
+  /* Dark mode for the textarea. Optional */
+  filter: invert(1) hue-rotate(180deg)
+}
+
+/* No close style tag since it works without it and saves 8 characters.*/
+```
+
+## Run Source Code
 
 Install global dependencies: [serve](https://www.npmjs.com/package/serve), [concurrently](https://www.npmjs.com/package/concurrently), [opener](https://www.npmjs.com/package/opener). These packages enable serving the code on a static server and opening it on your default web browser.
 ```
@@ -38,7 +96,7 @@ Run the code in `src` directory:
 npm start
 ```
 
-## Other minimal bookmarklet editors
+## Other minimalist bookmarklet editors
 
 ### Minimal Text Editor (37b)
 This one is good to memorize.
