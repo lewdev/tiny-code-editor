@@ -6,6 +6,8 @@ Not only is it a simple editor of 300b, but you can also copy-paste the code sni
 <a href="http://lewdev.github.io/apps/tiny-code-editor">Demo</a>
 </div>
 
+See also [💻 ExText](https://lewdev.github.io/apps/extext) which is the same thing but with code highlighting and a SublimeText-like editor.
+
 ## Copy-paste into Address Bar
 
 I combined elements from [Mini Code Editor](https://xem.github.io/miniCodeEditor/) by [xem](https://twitter.com/MaximeEuziere) to create this live code editor with dark mode and spell check disabled.
@@ -109,6 +111,26 @@ This is a fancy one with style from PC World.
 ```
 data:text/html,<body contenteditable style="font:2rem/1.5 monospace;max-width:60rem;margin:0 auto;padding:4rem">
 ```
+
+### My Favorite (468b)
+It's large, but it's packed with features:
+* Vertical layout
+* `Ctrl + Enter` to run code
+* Displays character counts
+* Contains code template
+
+I'm going for practical use and not so much minimalism. I do 
+```
+data:text/html,<p id=c style=position:absolute;bottom:0;right:0></p><textarea id=d spellcheck=false onkeyup='c.innerHTML=d.value.length'><p id=o></p>%0d<script>%0do.innerHTML = 0;%0d</script></textarea><iframe id=f></iframe><script>onkeypress=e=>(e.ctrlKey&&e.keyCode==13)||e.keyCode==10?f.srcdoc=d.value:0</script><style>*{box-sizing:border-box;margin:0}textarea,iframe{width:50%;height:100%;vertical-align:top}textarea{resize:none;filter:invert(1)hue-rotate(180deg)}
+```
+My code template:
+```
+<p id=o></p>
+<script>
+o.innerHTML = 0;
+</script>
+```
+This is basically what I start with for most any coding that I do. I usually test the output of something.
 
 ## Inspired by
 
