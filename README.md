@@ -16,38 +16,26 @@ I combined elements from [Mini Code Editor](https://xem.github.io/miniCodeEditor
 
 This is great for prototyping or using as a base-line for creating your own custom code editing tool to speed up development.
 
-## Press "Ctrl + Enter" to run 
+## Press `Ctrl + Enter` to run 
 This is avoids the problem of the browser crashing as you're typing out a `while` loop.
 
-### Vertical (324 chars)
+### Vertical (304 chars)
 ```
-data:text/html,<textarea id=d spellcheck=false></textarea><iframe id=f></iframe><script>onkeypress=e=>(e.ctrlKey&&e.keyCode==13)||e.keyCode==10?f.srcdoc=d.value:0</script><style>*{box-sizing:border-box;margin:0}textarea,iframe{width:50%;height:100%;vertical-align:top}textarea{resize:none;filter:invert(1)hue-rotate(180deg)}
+data:text/html,<textarea id=d onkeypress=d.spellcheck=0;e=event;k=e.keyCode;(e.ctrlKey&&k==13)||k==10?f.srcdoc=d.value:0 style=resize:none;filter:invert(1)hue-rotate(180deg)></textarea><iframe id=f></iframe><style>*{box-sizing:border-box;margin:0}textarea,iframe{width:50%;height:100%;vertical-align:top}
 ```
-## Horizontal (305 chars)
+## Horizontal (285 chars)
 ```
-data:text/html,<textarea id=d spellcheck=false></textarea><iframe id=f></iframe><script>onkeypress=e=>(e.ctrlKey&&e.keyCode==13)||e.keyCode==10?f.srcdoc=d.value:0</script><style>*{box-sizing:border-box;margin:0}textarea,iframe{width:100%;height:50%}textarea{resize:none;filter:invert(1)hue-rotate(180deg)}
+data:text/html,<textarea id=d onkeypress=d.spellcheck=0;e=event;k=e.keyCode;(e.ctrlKey&&k==13)||k==10?f.srcdoc=d.value:0 style=resize:none;filter:invert(1)hue-rotate(180deg)></textarea><iframe id=f></iframe><style>*{box-sizing:border-box;margin:0}textarea,iframe{width:100%;height:50%}
 ```
 
 ## Live Editor
 This is great for HTML/CSS coding since you're less concerned about running into JavaScript issues. Just be careful not to write a `while` loop.
 
-### Vertical (251 chars)
-```
-data:text/html,<textarea oninput=f.srcdoc=value spellcheck=false></textarea><iframe id=f></iframe><style>*{box-sizing:border-box;margin:0}textarea,iframe{width:50%;height:100%;vertical-align:top}textarea{resize:none;filter:invert(1)hue-rotate(180deg)}
-```
-### Horizontal (232 chars)
-```
-data:text/html,<textarea oninput=f.srcdoc=value spellcheck=false></textarea><iframe id=f></iframe><style>*{box-sizing:border-box;margin:0}textarea,iframe{width:100%;height:50%}textarea{resize:none;filter:invert(1)hue-rotate(180deg)}
-```
-
 ## Code with Comments
 `data:text/html,` implies that the following text will be returned as an HTML document.
 ```
 <!-- The browser's spellcheck doesn't like code  -->
-<textarea id=d spellcheck=false></textarea>
-
-<!-- This is where the code is run -->
-<iframe id=f></iframe>
+<textarea id=d spellcheck=false onkeypress={...} style={...}></textarea>
 
 <!--
   Detect when Ctrl + Enter is pressed
@@ -55,9 +43,21 @@ data:text/html,<textarea oninput=f.srcdoc=value spellcheck=false></textarea><ifr
   This is where the code in the textarea is put into the iframe:
     f.srcdoc = d.value
 -->
-<script>
-onkeypress = e => (e.ctrlKey && e.keyCode==13) || e.keyCode==10 ? f.srcdoc = d.value : 0
-</script>
+onkeypress=
+  e = event;
+  k = keyCode;
+  (e.ctrlKey && k == 13) || k == 10 ? f.srcdoc = d.value : 0
+
+style =
+  /* Removes the resize capability since it grows/shrinks with the window. */
+  resize:none;
+
+  /* Dark mode for the textarea. Optional */
+  filter: invert(1) hue-rotate(180deg)
+
+
+<!-- This is where the code is run -->
+<iframe id=f></iframe>
 
 <style>
 /* Makes sure textarea and iframe are flush in the window */
@@ -70,17 +70,9 @@ textarea, iframe {
 
   /*
     In Chrome, these two elements don't stay flush to the top of the window
-    in vertical layout.
+    in vertical layout only.
   */
   vertical-align: top;
-}
-
-textarea {
-  /* Removes the resize capability since it grows/shrinks with the window. */
-  resize:none;
-
-  /* Dark mode for the textarea. Optional */
-  filter: invert(1) hue-rotate(180deg)
 }
 
 /* No close style tag since it works without it and saves 8 characters.*/
@@ -114,14 +106,13 @@ data:text/html,<body contenteditable style="font:2rem/1.5 monospace;max-width:60
 
 ### My Favorite (468b)
 It's large, but it's packed with features:
-* Vertical layout
-* `Ctrl + Enter` to run code
 * Displays character counts
+* Vertical layout
 * Contains code template
 
-I'm going for practical use and not so much minimalism. I do 
+I'm going for practical use and not so much minimalism. I use this: (437b)
 ```
-data:text/html,<p id=c style=position:absolute;bottom:0;right:0></p><textarea id=d spellcheck=false onkeyup='c.innerHTML=d.value.length'><p id=o></p>%0d<script>%0do.innerHTML = 0;%0d</script></textarea><iframe id=f></iframe><script>onkeypress=e=>(e.ctrlKey&&e.keyCode==13)||e.keyCode==10?f.srcdoc=d.value:0</script><style>*{box-sizing:border-box;margin:0}textarea,iframe{width:50%;height:100%;vertical-align:top}textarea{resize:none;filter:invert(1)hue-rotate(180deg)}
+data:text/html,<p id=c style=position:absolute;top:0;right:4></p><textarea id=d spellcheck=false onkeypress=c.innerHTML=d.value.length;e=event;k=e.keyCode;(e.ctrlKey&&k==13)||k==10?f.srcdoc=d.value:0 style=resize:none;filter:invert(1)hue-rotate(180deg)><p id=o></p>%0d<script>%0do.innerHTML = 0;%0d</script></textarea><iframe id=f></iframe><style>*{box-sizing:border-box;margin:0}textarea,iframe{width:50%;height:100%;vertical-align:top}
 ```
 My code template:
 ```
